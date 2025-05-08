@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+ï»¿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -9,19 +8,13 @@ public class PlayerScript : MonoBehaviour
     int jumpCount;
     public float jumpPower = 5.0f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
         this.transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
 
-        //ƒWƒƒƒ“ƒv‚ÌƒR[ƒh‚ğ‘‚«•Ï‚¦‚é
-        if (Input.GetKeyDown("space") == true && jumpCount < 1)
+        //ã‚¸ãƒ£ãƒ³ãƒ—ã®ã‚³ãƒ¼ãƒ‰ã‚’æ›¸ãå¤‰ãˆã‚‹
+        if (Input.GetKeyDown("space") == true && jumpCount < 2)
         {
             this.GetComponent<Rigidbody2D>().velocity = new Vector3(0, jumpPower, 0);
             jumpCount += 1;
@@ -30,11 +23,16 @@ public class PlayerScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //’n–Ê‚É“–‚½‚Á‚½‚ÉjumpCount‚ğ0‚É–ß‚·
-        if (collision.gameObject.tag == "Ground")
+        //åœ°é¢ã«å½“ãŸã£ãŸæ™‚ã«jumpCountã‚’0ã«æˆ»ã™
+        if (collision.gameObject.tag == "Floor")
         {
             jumpCount = 0;
             Debug.Log(jumpCount);
+        }
+
+        if (collision.gameObject.tag == "Blocker")
+        {
+            FadeManager.Instance.LoadScene("GameOver", 3.0f);
         }
     }
 }
