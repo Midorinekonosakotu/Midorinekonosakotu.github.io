@@ -1,19 +1,10 @@
 ﻿using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class CubeMoveScript : MonoBehaviour
 {
     // マウスで掴んだゲームオブジェクトの中心座標と、マウスカーソルの座標の差分を格納する変数
     private Vector3 offset;
-    [SerializeField] private Vector3 puzzleObjPos1;
-    [SerializeField] private Vector3 puzzleObjPos2;
-    [SerializeField] private Vector3 puzzleObjPos3;
     private bool cubeMove = true;
-
-    private void Update()
-    {
-        
-    }
 
     // マウスでゲームオブジェクトをクリックしたときに呼び出されるメソッドです。offset変数に、マウスカーソルとゲームオブジェクトの中心座標の差分を格納します。
     void OnMouseDown()
